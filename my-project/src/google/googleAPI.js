@@ -8,8 +8,6 @@ export const getUserCityAndState = () => {
             navigator.geolocation.getCurrentPosition(async (position) => {
                 const { latitude, longitude } = position.coords;
                 console.log("User Coordinates:", latitude, longitude);
-                console.log(API_KEY)
-                // Call Reverse Geocoding API
                 const { city, state } = await getCityAndStateFromCoords(latitude -0.1, longitude -0.1);
                 console.log("Closest City:", city);
                 console.log("State:", state);
