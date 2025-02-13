@@ -7,7 +7,7 @@ export const getSpotifyAccessToken = async () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret)
+            'Authorization': 'Basic ' + btoa(`${import.meta.env.VITE_SPOTIFY_CLIENT_ID}:${import.meta.env.VITE_SPOTIFY_CLIENT_SECRET}`)
         },
         body: 'grant_type=client_credentials'
     });
@@ -16,8 +16,8 @@ export const getSpotifyAccessToken = async () => {
     return data.access_token;
 };
 
-export const getArtists = async (accessToken, query) => {
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist`, {
+export const getArtists = async (accessToken, genre) => {
+    const response = await fetch(`https://api.spotify.com/v1/search?q=genre:${genre}&type=artist`, {
         headers: {
             'Authorization': `Bearer ${accessToken}`
         }

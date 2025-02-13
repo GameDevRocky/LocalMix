@@ -1,14 +1,15 @@
-const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
-import { useEffect, useState } from "react";
+let API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+//API_KEY = "AIzaSyCNiHyeDUWeceEHZhOKcXDVoYuvFa_pTDw";
 
 export const getUserCityAndState = () => {
-
     return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
                 const { latitude, longitude } = position.coords;
                 console.log("User Coordinates:", latitude, longitude);
-                const { city, state } = await getCityAndStateFromCoords(latitude -0.1, longitude -0.1);
+                
+                // Call Reverse Geocoding API
+                const { city, state } = await getCityAndStateFromCoords(latitude, longitude);
                 console.log("Closest City:", city);
                 console.log("State:", state);
                 resolve({ city, state });
